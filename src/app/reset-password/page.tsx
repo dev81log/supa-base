@@ -5,6 +5,11 @@ import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
 import './reset-password.css';
 
+interface ResetPasswordFormData {
+  password: string;
+  confirmPassword: string;
+}
+
 export default function ResetPassword() {
   const router = useRouter();
   const [password, setPassword] = useState('');
