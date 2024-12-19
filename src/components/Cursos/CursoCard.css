@@ -1,0 +1,122 @@
+.curso-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+.curso-card:hover {
+    transform: translateY(-5px);
+}
+
+.curso-imagem {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.curso-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.curso-conteudo {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    position: relative;
+    z-index: 1;
+}
+
+.curso-conteudo h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.curso-descricao {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.curso-detalhes {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.curso-detalhes span {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.nivel {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.linguagem {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.duracao {
+    background: #e8f5e9;
+    color: #388e3c;
+}
+
+.curso-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.curso-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.data {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.preco {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.btn-matricula {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.btn-matricula:hover {
+    opacity: 0.9;
+}
