@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
@@ -23,14 +23,21 @@ export default function ResetPassword() {
   const [email, setEmail] = useState<string | null>(null);
 
   useEffect(() => {
-    // Recupera o email do usuário da sessão atual
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (!session?.user?.email) {
+    const fetchSession = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session?.user?.email) {
+          router.push('/login');
+          return;
+        }
+        setEmail(session.user.email);
+      } catch (error) {
+        console.error('Erro ao recuperar a sessão:', error);
         router.push('/login');
-        return;
       }
-      setEmail(session.user.email);
-    });
+    };
+
+    fetchSession();
   }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -50,18 +57,22 @@ export default function ResetPassword() {
     setMessage('');
 
     try {
-      const { error } = await supabase.auth.updateUser({
-        password: password
-      });
+      const { error } = await supabase.auth.updateUser({ password });
 
-      if (error) throw error;
+      if (error) {
+        throw new Error(error.message);
+      }
 
       setMessage('Senha atualizada com sucesso!');
       setTimeout(() => {
         router.push('/login');
       }, 2000);
-    } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
-      setMessage(error.message || 'Erro ao atualizar senha');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setMessage(error.message || 'Erro ao atualizar senha');
+      } else {
+        setMessage('Erro desconhecido ao atualizar senha');
+      }
     } finally {
       setLoading(false);
     }
@@ -117,4 +128,4 @@ export default function ResetPassword() {
       </div>
     </div>
   );
-} 
+}
