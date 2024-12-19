@@ -10,6 +10,10 @@ interface ResetPasswordFormData {
   confirmPassword: string;
 }
 
+interface AuthError {
+  message: string;
+}
+
 export default function ResetPassword() {
   const router = useRouter();
   const [password, setPassword] = useState('');
@@ -56,8 +60,9 @@ export default function ResetPassword() {
       setTimeout(() => {
         router.push('/login');
       }, 2000);
-    } catch (error: any) {
-      setMessage(error.message || 'Erro ao atualizar senha');
+    } catch (error: unknown) {
+      const authError = error as AuthError;
+      setMessage(authError.message || 'Erro ao atualizar senha');
     } finally {
       setLoading(false);
     }
