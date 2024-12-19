@@ -60,9 +60,8 @@ export default function ResetPassword() {
       setTimeout(() => {
         router.push('/login');
       }, 2000);
-    } catch (error: unknown) {
-      const authError = error as AuthError;
-      setMessage(authError.message || 'Erro ao atualizar senha');
+    } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
+      setMessage(error.message || 'Erro ao atualizar senha');
     } finally {
       setLoading(false);
     }
